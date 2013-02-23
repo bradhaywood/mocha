@@ -79,6 +79,22 @@ sub import {
         warnings->import();
         strict->import();
     }
+
+    {
+        no strict 'refs';
+        *{"${caller}::enum"} = sub {
+            my ($name, @args) = @_;
+            for (my $i = 0; $i < @args; $i++) {
+                my $n = $i+1;
+                my $opt = $args[$i];
+                if (my @a = split ':', $opt) {
+                    $n   = $a[1];
+                    $opt = $a[0];
+                }
+                *{"${name}::$opt"} = sub { return $n; };
+            }
+        };
+    }
 }
 
 package
