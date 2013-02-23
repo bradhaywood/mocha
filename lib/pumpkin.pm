@@ -87,11 +87,9 @@ sub import {
             for (my $i = 0; $i < @args; $i++) {
                 my $n = $i+1;
                 my $opt = $args[$i];
-                if (my @a = split ':', $opt) {
-                    $n   = $a[1];
-                    $opt = $a[0];
+                if (my ($opt, $n) = split ':', $opt) {
+                    *{"${name}::$opt"} = sub { return $n; };
                 }
-                *{"${name}::$opt"} = sub { return $n; };
             }
         };
     }
