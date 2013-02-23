@@ -16,7 +16,7 @@ resources (
    #homepage   => 'http://yourwebsitehere.com',
    #IRC        => 'irc://irc.perl.org/#pumpkin',
    license    => 'http://www.perlfoundation.org/artistic_license_2_0',
-   #repository => 'git://github.com/Brad Haywood/pumpkin.git',
+   repository => 'https://github.com/bradhaywood/pumpkin', 
    #bugtracker => 'http://rt.cpan.org/NoAuth/Bugs.html?Dist=pumpkin',
 );
 
@@ -26,14 +26,12 @@ configure_requires (
 
 build_requires (
    'Test::More' => 0,
-   'Import::Into' => 0,
-   'Method::Signatures' => '20130222',
-   'Mouse' => 0,
 );
 
 requires (
-   #'ABC'              => 1.6,
-   #'Foo::Bar::Module' => 5.0401,
+   'Import::Into' => 0,
+   'Method::Signatures' => '20130222',
+   'Mouse' => 0,
 );
 
 install_as_cpan;
