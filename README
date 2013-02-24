@@ -6,15 +6,18 @@ SYNOPSIS
         use mocha;
 
         # imports the same, but Moo::Role instead of Moo
-        use mocha qw(role);
+        use mocha as => 'role';
 
         # lose the signatures
-        use mocha qw(-sigs);
+        use mocha no => [qw/ sigs /];
     
         # lose signatures and Moo
-        use mocha qw(-sigs -oop);
+        use mocha no => [qw/ sigs oop /];
 
-WHY PUMPKIN???
+        # want Moose instead of Moo?
+        use mocha with => 'Moose';
+
+WHY MOCHA??
     Why not? Everyone has had their own opinions about the whole Perl 5
     rename/fork/new version explosion, mine is simple. Forget changing it
     dramatically - add a new pragma. One that imports everything that fixes
@@ -34,10 +37,20 @@ WHY PUMPKIN???
     Now, they look like this
 
         package MyApp::Role;
-        use mocha 'role';
+        use mocha as => 'role';
 
     It doesn't seem like a big difference, but to someone from the outside
     looking at Perl, that's a lot nicer.
+
+DIFFERENCES
+    I guess the closest module to mocha is nextgen. However, there are a few
+    differences. Firstly, mocha imports Method::Signatures so you can use
+    "method" and "func" with signatures instead of subs. Also, it utilises
+    Moo instead of Moose by default. Mocha also allows you to change the
+    framework if you wanted to use something else (ie: Moose or Mouse, if
+    you really must). And mocha also supports Roles, which means instead of
+    just importing the base OOP framework module, it will import Moo::Role
+    instead using a simple human-readable command.
 
 AUTHOR
     Brad Haywood <brad@perlpowered.com>

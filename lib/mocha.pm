@@ -21,6 +21,9 @@ mocha - Modern-ish Perl 5 pragma Prototype
     # lose signatures and Moo
     use mocha no => [qw/ sigs oop /];
 
+    # want Moose instead of Moo?
+    use mocha with => 'Moose';
+
 =head1 WHY MOCHA??
 
 Why not? Everyone has had their own opinions about the whole Perl 5 rename/fork/new version explosion, mine is simple. 
@@ -38,9 +41,13 @@ I was writing several roles and the top of my files looks something like this:
 Now, they look like this
 
     package MyApp::Role;
-    use mocha 'role';
+    use mocha as => 'role';
 
 It doesn't seem like a big difference, but to someone from the outside looking at Perl, that's a lot nicer.
+
+=head1 DIFFERENCES
+
+I guess the closest module to mocha is L<nextgen>. However, there are a few differences. Firstly, mocha imports L<Method::Signatures> so you can use C<method> and C<func> with signatures instead of subs. Also, it utilises L<Moo> instead of L<Moose> by default. Mocha also allows you to change the framework if you wanted to use something else (ie: Moose or L<Mouse>, if you really must). And mocha also supports Roles, which means instead of just importing the base OOP framework module, it will import Moo::Role instead using a simple human-readable command.
 
 =cut
 
