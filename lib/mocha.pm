@@ -61,7 +61,6 @@ use strict;
 
 use Import::Into;
 use feature ();
-use namespace::autoclean ();
 
 sub import {
     my ($class, %opts) = @_;
@@ -112,6 +111,7 @@ sub import {
                 _load_framework ($caller, $oop_fw);
             }
 
+            require namespace::autoclean;
             namespace::autoclean->import(-cleanee => $caller)
                 if defined $caller->can('meta');
         }
