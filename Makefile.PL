@@ -3,8 +3,8 @@ use strict;
 use warnings FATAL => 'all';
 use inc::Module::Install;
 
-name     'pumpkin';
-all_from 'lib/pumpkin.pm';
+name     'mocha';
+all_from 'lib/mocha.pm';
 author   q{Brad Haywood <brad@perlpowered.com>};
 license  'artistic2';
 
@@ -14,10 +14,10 @@ tests_recursive('t');
 
 resources (
    #homepage   => 'http://yourwebsitehere.com',
-   #IRC        => 'irc://irc.perl.org/#pumpkin',
+   #IRC        => 'irc://irc.perl.org/#mocha',
    license    => 'http://www.perlfoundation.org/artistic_license_2_0',
-   repository => 'https://github.com/bradhaywood/pumpkin', 
-   #bugtracker => 'http://rt.cpan.org/NoAuth/Bugs.html?Dist=pumpkin',
+   repository => 'https://github.com/bradhaywood/mocha', 
+   #bugtracker => 'http://rt.cpan.org/NoAuth/Bugs.html?Dist=mocha',
 );
 
 configure_requires (

@@ -7,7 +7,7 @@ use Test::More;
 plan tests => 1;
 
 BEGIN {
-    use_ok( 'pumpkin' ) || print "Bail out!\n";
+    use_ok( 'mocha' ) || print "Bail out!\n";
 }
 
-diag( "Testing pumpkin $pumpkin::VERSION, Perl $], $^X" );
+diag( "Testing mocha $mocha::VERSION, Perl $], $^X" );
