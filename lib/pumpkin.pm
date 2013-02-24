@@ -1,6 +1,6 @@
 package pumpkin;
 {
-    $pumpkin::VERSION = '0.001';
+    $pumpkin::VERSION = '0.002';
 }
 
 =head1 NAME
