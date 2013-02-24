@@ -1,18 +1,18 @@
 NAME
-    pumpkin - Modern-ish Perl 5 pragma Prototype
+    mocha - Modern-ish Perl 5 pragma Prototype
 
 SYNOPSIS
-        # imports Mouse, Method::Signatures, 5.10 features (say, switch, etc),
-        use pumpkin;
+        # imports Moo, Method::Signatures, 5.10 features (say, switch, etc),
+        use mocha;
 
-        # imports the same, but Mouse::Role instead of Mouse
-        use pumpkin qw(role);
+        # imports the same, but Moo::Role instead of Moo
+        use mocha qw(role);
 
         # lose the signatures
-        use pumpkin qw(-sigs);
+        use mocha qw(-sigs);
     
-        # lose signatures and Mouse
-        use pumpkin qw(-sigs -oop);
+        # lose signatures and Moo
+        use mocha qw(-sigs -oop);
 
 WHY PUMPKIN???
     Why not? Everyone has had their own opinions about the whole Perl 5
@@ -22,19 +22,19 @@ WHY PUMPKIN???
     adding a MOP into Perl core. I'm not 100% sure what this means, but I
     wouldn't like it to be forced. So we have a simple pragma you can turn
     on to give you these abilities, and more, like signatures. OK, so you
-    can do all of this already, why would I want to use pumpkin? I was
-    writing several roles and the top of my files looks something like this:
+    can do all of this already, why would I want to use mocha? I was writing
+    several roles and the top of my files looks something like this:
 
         package MyApp::Role;
     
         use 5.010;
         use Method::Signatures;
-        use Mouse::Role;
+        use Moo::Role;
 
     Now, they look like this
 
         package MyApp::Role;
-        use pumpkin 'role';
+        use mocha 'role';
 
     It doesn't seem like a big difference, but to someone from the outside
     looking at Perl, that's a lot nicer.

@@ -1,31 +1,31 @@
-package pumpkin;
+package mocha;
 {
-    $pumpkin::VERSION = '0.002';
+    $mocha::VERSION = '0.002';
 }
 
 =head1 NAME
 
-pumpkin - Modern-ish Perl 5 pragma Prototype
+mocha - Modern-ish Perl 5 pragma Prototype
 
 =head1 SYNOPSIS
 
     # imports Moo, Method::Signatures, 5.10 features (say, switch, etc),
-    use pumpkin;
+    use mocha;
 
     # imports the same, but Moo::Role instead of Moo
-    use pumpkin qw(role);
+    use mocha qw(role);
 
     # lose the signatures
-    use pumpkin qw(-sigs);
+    use mocha qw(-sigs);
     
     # lose signatures and Moo
-    use pumpkin qw(-sigs -oop);
+    use mocha qw(-sigs -oop);
 
 =head1 WHY PUMPKIN???
 
 Why not? Everyone has had their own opinions about the whole Perl 5 rename/fork/new version explosion, mine is simple. 
 Forget changing it dramatically - add a new pragma. One that imports everything that fixes most of the gripes outsiders have with our language. 
-There was talk of adding a MOP into Perl core. I'm not 100% sure what this means, but I wouldn't like it to be forced. So we have a simple pragma you can turn on to give you these abilities, and more, like signatures. OK, so you can do all of this already, why would I want to use pumpkin? 
+There was talk of adding a MOP into Perl core. I'm not 100% sure what this means, but I wouldn't like it to be forced. So we have a simple pragma you can turn on to give you these abilities, and more, like signatures. OK, so you can do all of this already, why would I want to use mocha? 
 I was writing several roles and the top of my files looks something like this:
 
     package MyApp::Role;
@@ -38,7 +38,7 @@ I was writing several roles and the top of my files looks something like this:
 Now, they look like this
 
     package MyApp::Role;
-    use pumpkin 'role';
+    use mocha 'role';
 
 It doesn't seem like a big difference, but to someone from the outside looking at Perl, that's a lot nicer.
 
