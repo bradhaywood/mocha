@@ -57,6 +57,7 @@ use strict;
 
 use Import::Into;
 use feature ();
+use namespace::autoclean ();
 
 sub import {
     my ($class, %opts) = @_;
@@ -97,12 +98,18 @@ sub import {
         Method::Signatures->import::into($caller);
     }
 
-    if ($has_oop) {
-        if ($is_role) {
-            _load_framework ($caller, "$oop_fw\::Role");
-        }
-        else {
-            _load_framework ($caller, $oop_fw);
+    if ($caller ne 'main') {
+        if ($has_oop) {
+            if ($is_role) {
+                my $klass = "${oop_fw}::Role";
+                _load_framework ($caller, "$oop_fw\::Role");
+            }
+            else {
+                _load_framework ($caller, $oop_fw);
+            }
+
+            namespace::autoclean->import(-cleanee => $caller)
+                if defined $caller->can('meta');
         }
     }
     else {
