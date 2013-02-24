@@ -13,15 +13,15 @@ mocha - Modern-ish Perl 5 pragma Prototype
     use mocha;
 
     # imports the same, but Moo::Role instead of Moo
-    use mocha qw(role);
+    use mocha as => 'role';
 
     # lose the signatures
-    use mocha qw(-sigs);
+    use mocha no => [qw/ sigs /];
     
     # lose signatures and Moo
-    use mocha qw(-sigs -oop);
+    use mocha no => [qw/ sigs oop /];
 
-=head1 WHY PUMPKIN???
+=head1 WHY MOCHA??
 
 Why not? Everyone has had their own opinions about the whole Perl 5 rename/fork/new version explosion, mine is simple. 
 Forget changing it dramatically - add a new pragma. One that imports everything that fixes most of the gripes outsiders have with our language. 
