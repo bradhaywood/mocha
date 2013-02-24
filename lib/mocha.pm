@@ -47,7 +47,11 @@ It doesn't seem like a big difference, but to someone from the outside looking a
 
 =head1 DIFFERENCES
 
-I guess the closest module to mocha is L<nextgen>. However, there are a few differences. Firstly, mocha imports L<Method::Signatures> so you can use C<method> and C<func> with signatures instead of subs. Also, it utilises L<Moo> instead of L<Moose> by default. Mocha also allows you to change the framework if you wanted to use something else (ie: Moose or L<Mouse>, if you really must). And mocha also supports Roles, which means instead of just importing the base OOP framework module, it will import Moo::Role instead using a simple human-readable command.
+I guess the closest module to mocha is L<nextgen>. However, there are a few differences. Firstly, mocha imports 
+L<Method::Signatures> so you can use C<method> and C<func> with signatures instead of subs. Also, it utilises L<Moo> 
+instead of L<Moose> by default. Mocha also allows you to change the framework if you wanted to use something else 
+(ie: Moose or L<Mouse>, if you really must). And mocha also supports Roles, which means instead of just importing 
+the base OOP framework module, it will import Moo::Role instead using a simple human-readable command.
 
 =cut
 
