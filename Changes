@@ -1,5 +1,13 @@
 Revision history for pumpkin
 
-0.01    Date/time
+0.002   24/02/2013
+        - New Feature: Override the default OOP framework using 'with'
+          - use pumpkin with => 'Moose';
+        - Changed: To turn off a feature, add it inside an arrayref with 'no'
+          - use pumpkin no => [qw/ sigs oop /];
+        - Changed: Turn pumpkin into a role with 'as'
+          - use pumpkin as => 'role';
+
+0.001   23/02/2013
         First version, released on an unsuspecting world.
 
