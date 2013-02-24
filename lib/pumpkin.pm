@@ -9,16 +9,16 @@ pumpkin - Modern-ish Perl 5 pragma Prototype
 
 =head1 SYNOPSIS
 
-    # imports Mouse, Method::Signatures, 5.10 features (say, switch, etc),
+    # imports Moo, Method::Signatures, 5.10 features (say, switch, etc),
     use pumpkin;
 
-    # imports the same, but Mouse::Role instead of Mouse
+    # imports the same, but Moo::Role instead of Moo
     use pumpkin qw(role);
 
     # lose the signatures
     use pumpkin qw(-sigs);
     
-    # lose signatures and Mouse
+    # lose signatures and Moo
     use pumpkin qw(-sigs -oop);
 
 =head1 WHY PUMPKIN???
@@ -32,7 +32,7 @@ I was writing several roles and the top of my files looks something like this:
     
     use 5.010;
     use Method::Signatures;
-    use Mouse::Role;
+    use Moo::Role;
     
 
 Now, they look like this
@@ -52,27 +52,50 @@ use Import::Into;
 use feature ();
 
 sub import {
-    my ($class, @opts) = @_;
+    my ($class, %opts) = @_;
     my $caller = caller;
 
     feature->import(':5.10');
 
-    # TODO: change behaviour to
-    # no => [ qw/ roles sigs/ ]
-    # and uh, basically re-write this entire thing
-    if (not grep { $_ eq '-sigs' } @opts) {
+    my ($has_sigs, $has_oop, $is_role) = (1, 1, 0);
+    my $oop_fw = 'Moo';
+
+    if ($opts{no}) {
+        if (ref $opts{no} eq 'ARRAY') {
+            for my $thing (@{$opts{no}}) {
+                $has_sigs = 0
+                    if $thing eq 'sigs';
+                $has_oop = 0
+                    if $thing eq 'oop';
+            }
+        }
+    }
+
+    if ($opts{with}) {
+        if ($has_oop) {
+            my @valid_oops = qw(Mouse Moo Moose);
+            $oop_fw = $opts{with}
+                if grep { $_ eq $opts{with} } @valid_oops;
+        }
+    }
+
+    if ($opts{as}) {
+        if ($has_oop && $opts{as} eq 'role') {
+            $is_role = 1;
+        }
+    }
+
+    if ($has_sigs) {
         require Method::Signatures;
         Method::Signatures->import::into($caller);
     }
 
-    if (not grep { $_ eq '-oop' } @opts) {
-        if (grep { $_ eq 'role' } @opts) {
-            require Mouse::Role;
-            Mouse::Role->import::into($caller);
+    if ($has_oop) {
+        if ($is_role) {
+            _load_framework ($caller, "$oop_fw\::Role");
         }
         else {
-            require Mouse;
-            Mouse->import::into($caller);
+            _load_framework ($caller, $oop_fw);
         }
     }
     else {
@@ -93,6 +116,22 @@ sub import {
             }
         };
     }
+}
+
+sub _load_framework {
+    my ($target, $module) = @_;
+    (my $file = $module) =~ s|::|/|g;
+    require "$file.pm";
+    
+    loadit: {
+        local $@;
+        eval qq{
+            package $target;
+            $module->import();
+        };
+    }
+    
+    return 1;
 }
 
 package
