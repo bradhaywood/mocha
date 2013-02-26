@@ -52,6 +52,25 @@ DIFFERENCES
     just importing the base OOP framework module, it will import Moo::Role
     instead using a simple human-readable command.
 
+OTHER STUFF
+  Enums are beautiful
+    Mocha has support for some type of "enum". Let's see how you can use one
+
+        enum Boolean => qw( True:1 False:0 );
+
+        say Boolean->True;
+        say Boolean->False;
+
+    Cool, cool. Seems simple enough. But if down the line you want to expand
+    one, you can.
+
+        Boolean->expand(qw/Maybe:3 SortOf:88/);
+        say Boolean->Maybe;
+        say Boolean->SortOf;
+
+    You are welcome to omit the value (The part to the right of the ":"). If
+    you do, it will use its index as the value instead.
+
 AUTHOR
     Brad Haywood <brad@perlpowered.com>
 
