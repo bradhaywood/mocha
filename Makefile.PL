@@ -32,6 +32,8 @@ requires (
    'Import::Into' => 0,
    'Method::Signatures' => '20130222',
    'Mouse' => 0,
+   'true' => 0,
+   'namespace::autoclean' => 0,
 );
 
 install_as_cpan;
