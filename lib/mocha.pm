@@ -77,7 +77,6 @@ You are welcome to omit the value (The part to the right of the C<:>). If you do
 use 5.010;
 use warnings;
 use strict;
-
 use Import::Into;
 use feature ();
 
@@ -121,6 +120,8 @@ sub import {
     }
 
     if ($caller ne 'main') {
+        require true;
+        true->import();
         if ($has_oop) {
             if ($is_role) {
                 my $klass = "${oop_fw}::Role";
