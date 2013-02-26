@@ -53,6 +53,25 @@ instead of L<Moose> by default. Mocha also allows you to change the framework if
 (ie: Moose or L<Mouse>, if you really must). And mocha also supports Roles, which means instead of just importing 
 the base OOP framework module, it will import Moo::Role instead using a simple human-readable command.
 
+=head1 OTHER STUFF
+
+=head2 Enums are beautiful
+
+Mocha has support for some type of C<enum>. Let's see how you can use one
+
+    enum Boolean => qw( True:1 False:0 );
+
+    say Boolean->True;
+    say Boolean->False;
+
+Cool, cool. Seems simple enough. But if down the line you want to expand one, you can.
+
+    Boolean->expand(qw/Maybe:3 SortOf:88/);
+    say Boolean->Maybe;
+    say Boolean->SortOf;
+
+You are welcome to omit the value (The part to the right of the C<:>). If you do, it will use its index as the value instead.
+
 =cut
 
 use 5.010;
@@ -123,14 +142,22 @@ sub import {
 
     {
         no strict 'refs';
-        *{"${caller}::enum"} = sub {
+        my $mk_enum = sub {
             my ($name, @args) = @_;
             for (my $i = 0; $i < @args; $i++) {
                 my $n = $i+1;
                 my $opt = $args[$i];
-                if (my ($opt, $n) = split ':', $opt) {
-                    *{"${name}::$opt"} = sub { return $n; };
-                }
+                my ($x, $y) = split ':', $opt;
+                my $val = defined $y ? $y : $i;
+                *{"${name}::$x"} = sub { return $val; };
+            }
+        };
+
+        *{"${caller}::enum"} = sub {
+            $mk_enum->(@_);
+            
+            *{"$_[0]::expand"} = sub {
+                $mk_enum->(@_);
             }
         };
     }
